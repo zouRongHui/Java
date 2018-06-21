@@ -12,7 +12,7 @@ import java.util.Random;
 public class RequestUtil {
 
     public static final String APP_KEY = "f07cc14d151f394debb5086ac64cea9d";
-    public static final String APP_SECRET = "2f8f65b0c068";
+    public static final String APP_SECRET = "af49930b40d6";
 
     /* 网易云信服务端URL */
     private static final String URL = "https://api.netease.im/nimserver";

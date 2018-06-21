@@ -1,24 +1,42 @@
 package org.rone.study.java.middleWare.redis;
 
-import java.util.Set;
+import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.Pipeline;
 
 /**
- * Redis 学习
+ * Redis
  */
 public class RedisTest {
 
-	public static void main(String[] args) {
-		testJedisPool();
+	public static void main(String[] args) throws IOException {
+//		simpleDemo();
+		pipelineDemo();
 	}
 
 	/**
-	 * 使用jedis连接池
+	 * redis的管道技术，一次处理多个操作
 	 */
-	public static void testJedisPool() {
+	public static void pipelineDemo() throws IOException {
+		//通过连接池获取jedis
+		try (Jedis jedis = gainJedisFromPool(); Pipeline pipeline = jedis.pipelined()) {
+			pipeline.set("rone", "3");
+			pipeline.set("sonw", "hello");
+			pipeline.incr("rone");
+			pipeline.get("rone");
+			pipeline.get("snow");List result = pipeline.syncAndReturnAll();
+			System.out.println(result);
+		}
+	}
+
+	/**
+	 * 从连接池中获取jedis，使用完后需要关闭jedis，否则不会返回连接池
+	 */
+	public static Jedis gainJedisFromPool() {
 		//通用连接池设置
 		GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
 		//最大连接数
@@ -36,38 +54,19 @@ public class RedisTest {
 		//****************
 		JedisPool jedisPool = new JedisPool(poolConfig, "127.0.0.1", 6379, 10000, null);
 		Jedis jedis = jedisPool.getResource();
-		jedis.auth("root");
-		System.out.println("服务正在运行: " + jedis.ping());
+		return jedis;
 	}
 
 	/**
-	 * jedis使用
+	 * 最简单的demo
 	 */
-	public static void testJedis() {
-		//连接 Redis 服务
-		Jedis jedis = new Jedis("127.0.0.1");
-		//验证密码
-		jedis.auth("root");
-		System.out.println("服务正在运行: " + jedis.ping());
-		//获取所有的 key
-		Set<String> keys = jedis.keys("*");
-		System.out.println(keys);
-		for (String key : keys) {
-			System.out.print("key: " + key + ", valueType: " + jedis.type(key) + ", value: ");
-			//判断 key 值对应的 value 的类型，来判断获取 value 的方式
-			if ("string".equals(jedis.type(key))) {
-				System.out.print(jedis.get(key));
-			} else if ("list".equals(jedis.type(key))) {
-				System.out.print(jedis.lrange(key, 0, jedis.llen(key)));
-			} else if ("hash".equals(jedis.type(key))) {
-				System.out.print(jedis.hgetAll(key));
-			} else if ("set".equals(jedis.type(key))) {
-				System.out.print(jedis.smembers(key));
-			} else if ("zset".equals(jedis.type(key))) {
-				System.out.print(jedis.zrange(key, 0, jedis.zcard(key)));
-			}
-			System.out.println();
-		}
+	public static void simpleDemo() {
+		//连接地址默认为：127.0.0.1:6379
+		Jedis jedis = new Jedis();
+		jedis.set("firstKey", "hello world");
+		String result = jedis.get("firstKey");
+		jedis.close();
+		System.out.println(result);
 	}
 
 }
