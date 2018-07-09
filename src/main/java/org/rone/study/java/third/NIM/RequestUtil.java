@@ -34,6 +34,8 @@ public class RequestUtil {
     public static final String URL_TEAM_CREATE = URL + "/team/create.action";
     /* 查询群信息一级成员列表 */
     public static final String URL_TEAM_QUERY = URL + "/team/query.action";
+    /* 创建聊天室 */
+    public static final String URL_CHATROOM_CREATE = URL + "/chatroom/create.action";
 
     /**
      * 设置请求的header
