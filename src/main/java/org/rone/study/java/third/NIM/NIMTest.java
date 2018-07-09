@@ -23,18 +23,22 @@ public class NIMTest {
         HttpClient httpClient = HttpClientBuilder.create().build();
         String url;
 //        url = RequestUtil.URL_FRIEND_GET;
-        url = RequestUtil.URL_USER_GET_UINFOS;
+//        url = RequestUtil.URL_USER_GET_UINFOS;
 //        url = RequestUtil.URL_USER_SET_SPECIAL_RELATION;
 //        url = RequestUtil.URL_USER_LIST_BLACK_AND_MUTE_LIST;
 //        url = RequestUtil.URL_MSG_SEND_MSG;
 //        url = RequestUtil.URL_TEAM_CREATE;
 //        url = RequestUtil.URL_TEAM_QUERY;
+        url = RequestUtil.URL_CHATROOM_CREATE;
         HttpPost httpPost = new HttpPost(url);
         RequestUtil.setHeader(httpPost);
 
         // 设置请求的参数
         List<NameValuePair> paramList = new ArrayList<>();
 //        paramList.add(new BasicNameValuePair("", ""));
+        //创建聊天室
+        paramList.add(new BasicNameValuePair("creator", "T001"));
+        paramList.add(new BasicNameValuePair("name", "我的聊天室"));
         //查询群信息一级成员列表
 //        JSONArray tidJsons = new JSONArray();
 //        tidJsons.add("505492688");
@@ -67,9 +71,9 @@ public class NIMTest {
 //        paramList.add(new BasicNameValuePair("relationType", "1"));
 //        paramList.add(new BasicNameValuePair("value", "1"));
         //获取用户名片
-        JSONArray accidJsons = new JSONArray();
-        accidJsons.add("accid_15950");
-        paramList.add(new BasicNameValuePair("accids", accidJsons.toString()));
+//        JSONArray accidJsons = new JSONArray();
+//        accidJsons.add("accid_15950");
+//        paramList.add(new BasicNameValuePair("accids", accidJsons.toString()));
         //获取朋友accidJsons
 //        paramList.add(new BasicNameValuePair("accid", "T001"));
 //        paramList.add(new BasicNameValuePair("updatetime", "0"));
