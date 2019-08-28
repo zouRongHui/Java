@@ -10,6 +10,22 @@ import java.util.Date;
  */
 public class DateUtil {
 
+    private DateUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    /**
+     * 将日期转换成指定格式的字符串
+     * @author  zouRongHui  2019年8月28日11:30:09
+     * @param date
+     * @param format
+     * @return
+     */
+    public static String date2String(Date date, String format) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        return simpleDateFormat.format(date);
+    }
+
     /**
      * create by zouRongHui 2018/5/31
      * 格式化日期的显示格式，
