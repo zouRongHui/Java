@@ -146,6 +146,29 @@
             <version>4.0.0</version>
         </dependency>
 
+        <!--微信小程序数据解密-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>1.46</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ezmorph</groupId>
+            <artifactId>ezmorph</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+
         <!--<dependency>-->
 <!--　　　　　　<groupId>org.slf4j</groupId>-->
 <!--　　　　　　<artifactId>slf4j-api</artifactId>-->
@@ -196,6 +219,7 @@
                 <!--资源文件的路径，默认位于/src/main/resources/目录下-->
                 <directory>src/main/resources</directory>
                 <!--一组文件名的匹配模式，被匹配的资源文件将被构建过程处理-->
+                <!--缺省时，默认加载所有文件-->
                 <includes>
                     <include>*.xml</include>
                     <include>*.properties</include>

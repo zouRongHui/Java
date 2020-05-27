@@ -7,6 +7,7 @@ import org.rone.study.java.entity.User;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class FastJsonTest {
     public static void main(String[] args) {
         newObject();

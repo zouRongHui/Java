@@ -14,8 +14,8 @@ import redis.clients.jedis.Pipeline;
 public class RedisTest {
 
 	public static void main(String[] args) throws IOException {
-//		simpleDemo();
-		pipelineDemo();
+		simpleDemo();
+//		pipelineDemo();
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class RedisTest {
 		//默认false，return的时候检测是有有效，如果无效则从连接池中移除，并尝试获取继续获取
 		poolConfig.setTestOnReturn(true);
 		//****************
-		JedisPool jedisPool = new JedisPool(poolConfig, "127.0.0.1", 6379, 10000, null);
+		JedisPool jedisPool = new JedisPool(poolConfig, "114.55.26.204", 6379, 10000, "redis");
 		Jedis jedis = jedisPool.getResource();
 		return jedis;
 	}
